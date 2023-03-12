@@ -27,13 +27,7 @@ function onInput(event) {
   const name = event.target.name;
   const value = event.target.value;
 
-  if (name === 'email') {
-    tempInput.email = value;
-  }
-
-  if (name === 'message') {
-    tempInput.message = value;
-  }
+  tempInput[name] = value;
 
   localStorage.setItem('feedback-form-state', JSON.stringify(tempInput));
 }
