@@ -8,11 +8,11 @@ refs = {
 
 // Check if there is saved data in localStorage
 const savedInput = localStorage.getItem('feedback-form-state');
-const parsedSavedInout = JSON.parse(savedInput);
+const parsedSavedInput = JSON.parse(savedInput);
 
 if (savedInput) {
-  refs.input.value = parsedSavedInout.email;
-  refs.textarea.value = parsedSavedInout.message;
+  refs.input.value = parsedSavedInput.email;
+  refs.textarea.value = parsedSavedInput.message;
 }
 
 // Create an empty object that will store form data
@@ -43,7 +43,7 @@ refs.form.addEventListener('submit', onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
-  console.log('User submitted the following data:', parsedSavedInout);
+  console.log('User submitted the following data:', parsedSavedInput);
   localStorage.removeItem('feedback-form-state');
   event.currentTarget.reset();
 }
