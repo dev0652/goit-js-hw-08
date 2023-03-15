@@ -6,20 +6,18 @@ const refs = {
   textarea: document.querySelector('textarea[name="message"]'),
 };
 
-// Check if there is saved data in localStorage
 const savedInput = localStorage.getItem('feedback-form-state');
 const parsedSavedInput = JSON.parse(savedInput);
 
+// Check for saved data in 'localStorage'
 if (savedInput) {
+  // Prepolulate form fields with data from 'localStorage'
   refs.input.value = parsedSavedInput.email;
   refs.textarea.value = parsedSavedInput.message;
 }
 
-// Create an empty object that will store form data
-const tempInput = {
-  email: '',
-  message: '',
-};
+// Create a temp object for storing form data
+let tempInput = parsedSavedInput || {};
 
 refs.form.addEventListener('input', throttle(onInput, 500));
 
@@ -40,4 +38,5 @@ function onSubmit(event) {
   console.log('User submitted the following data:', parsedSavedInput);
   localStorage.removeItem('feedback-form-state');
   event.currentTarget.reset();
+  tempInput = {};
 }
