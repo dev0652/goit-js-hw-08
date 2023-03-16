@@ -7,12 +7,21 @@ const refs = {
   button: document.querySelector('button[type="submit"]'),
 };
 
+refs.input.required = true;
+refs.textarea.required = true;
+
 // Function that checks if all required fields have been filled
-function checkIfAllFieldsWereFilled() {
-  if (refs.input.value !== '' && refs.textarea.value !== '') {
+function checkFormValidity() {
+  // if (refs.input.value !== '' && refs.textarea.value !== '') {
+  //   refs.button.disabled = false;
+  //   return;
+  // }
+
+  if (refs.input.checkValidity() && refs.textarea.checkValidity()) {
     refs.button.disabled = false;
     return;
   }
+
   refs.button.disabled = true;
 }
 
@@ -27,7 +36,7 @@ if (savedInput) {
 }
 
 // Check if all required fields have been filled
-checkIfAllFieldsWereFilled();
+checkFormValidity();
 
 // Create a temp object for storing form data
 let tempInput = parsedSavedInput || {};
@@ -42,7 +51,7 @@ function onInput(event) {
   tempInput[name] = value;
 
   localStorage.setItem('feedback-form-state', JSON.stringify(tempInput));
-  checkIfAllFieldsWereFilled();
+  checkFormValidity();
 }
 
 // Submitting the form
