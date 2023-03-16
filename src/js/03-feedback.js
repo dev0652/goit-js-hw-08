@@ -7,10 +7,7 @@ const refs = {
   button: document.querySelector('button[type="submit"]'),
 };
 
-// Disable 'Submit' button...
-// refs.button.setAttribute('disabled', true);
-
-// ...until all required fields have been filled
+// Function that checks if all required fields have been filled
 function checkIfAllFieldsWereFilled() {
   if (refs.input.value !== '' && refs.textarea.value !== '') {
     refs.button.disabled = false;
@@ -22,13 +19,15 @@ function checkIfAllFieldsWereFilled() {
 const savedInput = localStorage.getItem('feedback-form-state');
 const parsedSavedInput = JSON.parse(savedInput);
 
-// Check for saved data in 'localStorage'
+// Check if there is saved data in 'localStorage'
 if (savedInput) {
-  // Pre-populate form fields with data from 'localStorage'
+  // If yes, pre-populate form fields with saved data
   refs.input.value = parsedSavedInput.email;
   refs.textarea.value = parsedSavedInput.message;
-  checkIfAllFieldsWereFilled();
 }
+
+// Check if all required fields have been filled
+checkIfAllFieldsWereFilled();
 
 // Create a temp object for storing form data
 let tempInput = parsedSavedInput || {};
