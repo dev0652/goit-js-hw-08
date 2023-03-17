@@ -12,11 +12,6 @@ refs.textarea.required = true;
 
 // Function that checks if all required fields have been filled
 function checkFormValidity() {
-  // if (refs.input.value !== '' && refs.textarea.value !== '') {
-  //   refs.button.disabled = false;
-  //   return;
-  // }
-
   if (refs.input.checkValidity() && refs.textarea.checkValidity()) {
     refs.button.disabled = false;
     return;
@@ -60,7 +55,9 @@ refs.form.addEventListener('submit', onSubmit);
 function onSubmit(event) {
   event.preventDefault();
 
-  console.log('User submitted the following data:', parsedSavedInput);
+  // Log the object with submitted data to console
+  console.log('User submitted the following data:', tempInput);
+  // Remove saved data from 'localStorage'
   localStorage.removeItem('feedback-form-state');
   // Reset fom fields
   event.currentTarget.reset();
